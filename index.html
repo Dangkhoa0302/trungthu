@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reiya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Be+Vietnam+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E9EDFA; --ink:#171B3D; --muted:#4A507D; --moon:#F2C94C; --line:#C5CCEB; --card:#F4F6FD;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#12152E;--ink:#E9EDFA;--muted:#A3A9D6;--line:#2B3160;--card:#1A1E3F}
+}
+:root[data-theme="dark"]{--bg:#12152E;--ink:#E9EDFA;--muted:#A3A9D6;--line:#2B3160;--card:#1A1E3F}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,sans-serif;font-size:1.0625rem;line-height:1.65}
+main{max-width:46rem;margin:0 auto;padding:0 1.5rem 4rem}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .in{max-width:46rem;margin:0 auto;padding:.7rem 1.5rem;display:flex;align-items:center;gap:.6rem}
+.logo{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:1.3rem;margin-right:auto;text-decoration:none}
+.btn{font:inherit;font-size:.95rem;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:.4rem 1rem;border-radius:999px;text-decoration:none;display:inline-block;line-height:1.5}
+.btn.fill{background:var(--ink);color:var(--bg)}
+.btn:hover{background:var(--moon);border-color:var(--moon);color:#171B3D}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--moon);outline-offset:3px}
+.count{display:inline-block;min-width:1.4em;padding:0 .3em;margin-left:.3em;border-radius:999px;background:var(--moon);color:#171B3D;font-size:.8rem;text-align:center}
+.hero{position:relative;padding:4rem 0 3rem;overflow:hidden}
+.moon{position:absolute;right:-2rem;top:1.5rem;width:min(52vw,16rem);aspect-ratio:1;border-radius:50%;background:var(--moon);animation:rise 1.2s ease-out both}
+.hero p.hi{position:relative;margin:0 0 .25rem;color:var(--muted)}
+h1{position:relative;margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:clamp(4.5rem,24vw,10rem);line-height:.95;letter-spacing:-.04em}
+.tag{position:relative;margin:1.25rem 0 0;max-width:26rem;font-size:1.2rem}
+h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:500;font-size:1.5rem;margin:0 0 .75rem}
+section{padding:2.25rem 0;border-top:1px solid var(--line)}
+section p{margin:0;max-width:34rem}
+ul.chips{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.6rem}
+ul.chips li{padding:.35rem .9rem;border:1px solid var(--line);border-radius:999px}
+a{color:var(--ink);text-decoration-color:var(--moon);text-decoration-thickness:.18em;text-underline-offset:.2em}
+a.btn{text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{aspect-ratio:4/3;background:var(--moon);display:grid;place-items:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:3rem;color:#171B3D}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.card .b{padding:.9rem 1rem 1rem;display:flex;flex-direction:column;gap:.25rem;flex:1}
+.card h3{margin:0;font-size:1.05rem;font-weight:500}
+.card .d{font-size:.9rem;color:var(--muted);flex:1}
+.price{font-weight:500}
+.card .btn{margin-top:.5rem;align-self:flex-start}
+footer{color:var(--muted);font-size:.9rem;padding-top:1rem}
+@keyframes rise{from{transform:translateY(2rem);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.moon{animation:none}html{scroll-behavior:auto}aside,#ov{transition:none}}
+@media(max-width:400px){.btn{padding:.35rem .75rem;font-size:.9rem}nav .in{padding-left:1rem;padding-right:1rem}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="in">
+    <a class="logo" href="index.html">Reiya</a>
+    <a class="btn fill" href="index.html">Trang cá nhân</a>
+    <a class="btn" href="shop.html">Giỏ hàng <span class="count" id="cnt">0</span></a>
+  </div>
+</nav>
+
+<main>
+  <header class="hero">
+    <div class="moon" aria-hidden="true"></div>
+    <p class="hi">Xin chào, mình là</p>
+    <h1>Reiya</h1>
+    <p class="tag">Sinh viên, thích đi du lịch. Tên thật là Khoa.</p>
+  </header>
+  <section id="profile">
+    <h2>Giới thiệu</h2>
+    <p>Tên thật của mình là Khoa, nhưng bạn cứ gọi mình là Reiya. Mình là sinh viên, và đây là góc nhỏ để mình chia sẻ những điều mình thích.</p>
+    <h2 style="margin-top:1.75rem">Mình thích</h2>
+    <ul class="chips"><li>Du lịch</li></ul>
+  </section>
+  <section id="contact">
+    <h2>Liên hệ và phản hồi</h2>
+    <p>Có góp ý hay muốn trò chuyện? Gửi thư cho mình tại <a href="mailto:dangkhoa326vn@gmail.com?subject=Ph%E1%BA%A3n%20h%E1%BB%93i%20v%E1%BB%81%20trang%20web%20c%E1%BB%A7a%20Reiya">dangkhoa326vn@gmail.com</a>.</p>
+  </section>
+  <footer>© 2026 Reiya</footer>
+</main>
+
+
+<script>
+/* Hiện số sản phẩm đang có trong giỏ */
+try {
+  const c = JSON.parse(localStorage.getItem("reiya-cart") || "{}") || {};
+  document.getElementById("cnt").textContent = Object.values(c).reduce((a, b) => a + (+b || 0), 0);
+} catch (e) {}
+</script>
+</body>
+</html>
