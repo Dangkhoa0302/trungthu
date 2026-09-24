@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thiệp chúc Trung Thu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--bg:#eceaf5;--panel:#fff;--text:#22244a;--muted:#5d6086;--line:#d6d3ea;--accent:#b5262b;--accent-t:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0f26;--panel:#191c40;--text:#f1eee4;--muted:#a9abcf;--line:#2c3062;--accent:#f2c14e;--accent-t:#14163a}}
+:root[data-theme="dark"]{--bg:#0d0f26;--panel:#191c40;--text:#f1eee4;--muted:#a9abcf;--line:#2c3062;--accent:#f2c14e;--accent-t:#14163a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.55 'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif}
+main{max-width:520px;margin:0 auto;padding:20px 16px 40px}
+h1{font:600 22px/1.2 'Playfair Display',Georgia,serif;margin:4px 0 16px}
+
+/* Thiệp */
+.card{--c1:#1b1e52;--c2:#0d0f26;--gold:#f2c14e;--paper:#fbf1d8;position:relative;overflow:hidden;border-radius:18px;padding:56px 26px 30px;min-height:380px;color:var(--paper);
+background:radial-gradient(1.5px 1.5px at 12% 18%,#fff8,transparent),radial-gradient(1.5px 1.5px at 30% 60%,#fff6,transparent),radial-gradient(2px 2px at 55% 12%,#fff9,transparent),radial-gradient(1.5px 1.5px at 80% 70%,#fff7,transparent),radial-gradient(1.5px 1.5px at 90% 40%,#fff6,transparent),radial-gradient(1.5px 1.5px at 20% 88%,#fff5,transparent),linear-gradient(170deg,var(--c1),var(--c2))}
+.card[data-t="1"]{--c1:#7d1418;--c2:#2e0709}
+.card[data-t="2"]{--c1:#12594f;--c2:#062824}
+.moon{position:absolute;top:-34px;right:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 38% 36%,#fffbe6,#f7d977 62%,#e5b64a);box-shadow:0 0 60px 22px #f2c14e55;animation:glow 5s ease-in-out infinite alternate}
+@keyframes glow{to{box-shadow:0 0 84px 34px #f2c14e77}}
+.lan{position:absolute;left:22px;top:0;font-size:34px;line-height:1;transform-origin:top center;animation:swing 3.6s ease-in-out infinite alternate}
+@keyframes swing{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+.lan::before{content:"";display:block;width:1px;height:20px;margin:0 auto;background:var(--gold)}
+.fx{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.fx span{position:absolute;bottom:-40px;opacity:0;animation:rise linear infinite backwards}
+@keyframes rise{0%{transform:translate(0,0) rotate(-6deg);opacity:0}10%{opacity:.85}50%{transform:translate(16px,-330px) rotate(6deg)}90%{opacity:.85}100%{transform:translate(-12px,-680px) rotate(-6deg);opacity:0}}
+.card h2,.to,.msg,.from,.cid,.gate{position:relative;z-index:1}
+.cid{font-size:12px;opacity:.75;text-align:right;margin-top:10px}
+.to{font:italic 500 20px 'Playfair Display',Georgia,serif;margin:-6px 0 12px;overflow-wrap:anywhere}
+.card h2{font:600 30px/1.15 'Playfair Display',Georgia,serif;color:var(--gold);margin:0 0 18px;max-width:11ch}
+.msg{font-size:17px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 22px;min-height:80px}
+.from{font:italic 500 20px 'Playfair Display',Georgia,serif;color:var(--gold);text-align:right;overflow-wrap:anywhere}
+.reveal{animation:rv 1s ease both}
+@keyframes rv{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.gate{margin:0 0 22px}
+.gate p{margin:0 0 12px;line-height:1.65}
+.gate .gh{color:var(--gold);font-style:italic}
+.card .gate input{background:#ffffff1a;color:var(--paper);border-color:var(--gold)}
+.card .gate input::placeholder{color:#fbf1d899}
+.gate .btn{background:var(--gold);color:#14163a;margin-top:10px}
+.gate .ge{color:#ffb4a8;font-size:14px;min-height:22px;margin:8px 0 0}
+.card:not(.locked) .gate,.card.locked .to,.card.locked .msg,.card.locked .from,.card.locked .cid{display:none}
+@media (prefers-reduced-motion:reduce){.moon,.lan,.reveal{animation:none}.fx{display:none}}
+
+/* Bảng sửa */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:16px}
+label{display:block;font-weight:500;margin:0 0 6px}
+input[type=text],textarea{width:100%;font:inherit;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:110px;resize:vertical}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{margin-bottom:14px}
+.cnt{font-size:13px;color:var(--muted);text-align:right;margin-top:2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:inherit;font-size:14px;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--accent);color:var(--accent-t);border-color:var(--accent)}
+.btn{font:inherit;font-weight:600;border:0;border-radius:10px;padding:12px 16px;cursor:pointer;background:var(--accent);color:var(--accent-t);width:100%}
+.btn.alt{background:transparent;color:var(--text);border:1px solid var(--line);width:auto;font-weight:500;padding:8px 14px}
+.qrbox{display:flex;justify-content:center;padding:14px;background:#fff;border-radius:12px;width:max-content;margin:0 auto 12px;max-width:100%}
+.qrbox img,.qrbox canvas{max-width:100%;height:auto}
+.hint{font-size:14px;color:var(--muted);margin:0 0 12px;text-align:center}
+.err{color:#c0392b;font-size:14px;text-align:center;margin:0 0 8px}
+[hidden]{display:none!important}
+.view #editor,.view #head{display:none}
+.view main{padding-top:6vh}
+.view .card{min-height:min(560px,78vh)}
+</style>
+</head>
+<body>
+<main>
+  <h1 id="head">Tạo thiệp chúc Trung Thu</h1>
+
+  <section class="card" id="card" data-t="0" aria-label="Thiệp chúc Trung Thu">
+    <div class="fx" id="fx" aria-hidden="true"></div>
+    <div class="moon" aria-hidden="true"></div>
+    <div class="lan" aria-hidden="true">🏮</div>
+    <h2>Trung Thu An Lành</h2>
+    <div class="gate">
+      <p id="gTx">Bạn có một tấm thiệp Trung Thu. Nhập câu mở thiệp để xem nhé.</p>
+      <p class="gh" id="gHint" hidden></p>
+      <input type="text" id="gIn" placeholder="Nhập câu mở thiệp" autocomplete="off" aria-label="Câu mở thiệp">
+      <button class="btn" id="gBtn" type="button">Mở thiệp</button>
+      <p class="ge" id="gErr" role="alert"></p>
+    </div>
+    <div class="to" id="ct" hidden></div>
+    <p class="msg" id="cm"></p>
+    <div class="from" id="cf"></div>
+    <div class="cid" id="cid" hidden></div>
+  </section>
+
+  <div id="editor">
+    <section class="panel">
+      <div class="row">
+        <label for="inTo">Tên người nhận</label>
+        <input type="text" id="inTo" maxlength="40" autocomplete="off" placeholder="Ví dụ: Bà ngoại">
+      </div>
+      <div class="row">
+        <label for="inName">Tên người gửi</label>
+        <input type="text" id="inName" maxlength="40" autocomplete="off">
+      </div>
+      <div class="row">
+        <label for="inMsg">Lời chúc</label>
+        <textarea id="inMsg" maxlength="300"></textarea>
+        <div class="cnt"><span id="cnt">0</span>/300</div>
+        <button class="btn alt" id="sugBtn" type="button">Gợi ý lời chúc khác</button>
+      </div>
+      <div class="row" style="margin-bottom:0">
+        <label>Màu thiệp</label>
+        <div class="chips" id="chips">
+          <button class="chip" type="button" data-t="0" aria-pressed="true">Đêm trăng</button>
+          <button class="chip" type="button" data-t="1" aria-pressed="false">Lồng đèn</button>
+          <button class="chip" type="button" data-t="2" aria-pressed="false">Ngọc bích</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="row">
+        <label for="inKey">Câu mở thiệp (không bắt buộc)</label>
+        <input type="text" id="inKey" maxlength="40" autocomplete="off" placeholder="Ví dụ: trăng rằm tháng tám">
+        <div class="cnt" style="text-align:left">Người nhận phải nhập đúng câu này mới xem được thiệp. Không phân biệt hoa thường và dấu. Để trống thì thiệp mở thẳng.</div>
+      </div>
+      <div class="row">
+        <label for="inHint">Gợi ý cho người nhận (không bắt buộc)</label>
+        <input type="text" id="inHint" maxlength="60" autocomplete="off" placeholder="Ví dụ: câu mình hay nói mỗi dịp rằm">
+      </div>
+      <button class="btn" id="qrBtn" type="button">Tạo mã QR</button>
+      <div id="qrOut" hidden style="margin-top:16px">
+        <div class="qrbox" id="qr"></div>
+        <p class="err" id="err"></p>
+        <p class="hint">Mã thiệp: <b id="idVal"></b> <button class="btn alt" id="idCp" type="button" style="margin-left:6px">Sao chép</button></p>
+        <p class="hint" id="qrNote">Người nhận quét mã bằng camera điện thoại để mở thiệp. Chụp màn hình để lưu mã.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var presets=[
+    "Chúc cả nhà một mùa Trung Thu đủ đầy: trăng tròn, bánh thơm và tiếng cười vang khắp nhà.",
+    "Trung Thu này chúc bạn bình an, nhiều niềm vui và luôn có người sum vầy bên mâm cỗ.",
+    "Đêm rằm trăng sáng, chúc con cháu ngoan khỏe, ông bà cha mẹ thêm tuổi thêm phúc.",
+    "Gửi bạn một miếng bánh nướng, một chiếc lồng đèn và lời chúc Trung Thu thật ấm áp."
+  ];
+  var cardId="", lastUrl="";
+  var S={n:"Bạn của bạn",r:"",m:presets[0],t:0}, pi=0, qrOn=false, qrTk=0, K=null;
+  var card=$("card"), fx=$("fx"), icons=["🏮","✨","⭐","🥮","🌕"];
+
+  /* Mã hóa */
+  function b64(u){var s="";for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+  function unb64(s){s=s.replace(/-/g,"+").replace(/_/g,"/");var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+  function norm(p){return p.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").toLowerCase().replace(/\s+/g," ").trim()}
+  function dkey(p,salt){
+    return crypto.subtle.importKey("raw",new TextEncoder().encode(norm(p)),"PBKDF2",false,["deriveKey"]).then(function(k){
+      return crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:100000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])});
+  }
+  async function lock(o,p){
+    var salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),k=await dkey(p,salt);
+    var ct=new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM",iv:iv},k,new TextEncoder().encode(JSON.stringify(o))));
+    var out=new Uint8Array(28+ct.length);out.set(salt,0);out.set(iv,16);out.set(ct,28);return b64(out);
+  }
+  async function unlock(s,p){
+    var u=unb64(s),k=await dkey(p,u.slice(0,16));
+    var pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:u.slice(16,28)},k,u.slice(28));
+    return JSON.parse(new TextDecoder().decode(pt));
+  }
+  function apply(o){S.r=String(o.r||"").slice(0,40);S.n=String(o.n||"").slice(0,40);S.m=String(o.m||"").slice(0,300);S.t=[0,1,2].indexOf(+o.t)>-1?+o.t:0;render()}
+
+  /* Hiệu ứng: lồng đèn, sao, bánh nướng bay lên */
+  function spawn(n,burst){
+    for(var i=0;i<n;i++){
+      var s=document.createElement("span"),r=Math.random,d=burst?5+r()*4:8+r()*8;
+      s.textContent=icons[Math.floor(r()*icons.length)];
+      s.style.cssText="left:"+(r()*94)+"%;font-size:"+(14+r()*18)+"px;animation-duration:"+d+"s;animation-delay:"+(burst?r()*1.2:-r()*d)+"s";
+      if(burst){s.style.animationIterationCount="1";s.addEventListener("animationend",function(){this.remove()})}
+      fx.appendChild(s);
+    }
+  }
+
+  function newId(){var a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",s="TT-";for(var i=0;i<6;i++)s+=a.charAt(Math.floor(Math.random()*a.length));return s}
+  window.thiepData=function(){return{id:cardId,to:S.r,from:S.n,message:S.m,theme:S.t,url:lastUrl}};
+
+  function render(){
+    $("cm").textContent=S.m||"Hãy nhập lời chúc của bạn…";
+    $("ct").textContent=S.r?"Gửi đến "+S.r+",":"";$("ct").hidden=!S.r;
+    $("cf").textContent="— "+(S.n||"…");
+    card.dataset.t=S.t;
+    $("cnt").textContent=S.m.length;
+    var chips=document.querySelectorAll(".chip");
+    for(var i=0;i<chips.length;i++)chips[i].setAttribute("aria-pressed",String(+chips[i].dataset.t===S.t));
+    if(qrOn)makeQR();
+  }
+
+  async function makeQR(){
+    var tk=++qrTk, o={n:S.n,r:S.r,m:S.m,t:S.t}, p=$("inKey").value, h=$("inHint").value.trim().slice(0,60), tail, locked=!!norm(p);
+    $("qrOut").hidden=false; qrOn=true; if(!cardId)cardId=newId();
+    try{
+      if(locked){
+        if(!(window.crypto&&crypto.subtle))throw new Error("nocrypto");
+        tail="#k="+await lock(o,p)+(h?"&h="+encodeURIComponent(h):"")+(S.r.trim()?"&r="+encodeURIComponent(S.r.trim()):"")+"&i="+cardId;
+      }else tail="#c="+b64(new TextEncoder().encode(JSON.stringify(o)))+"&i="+cardId;
+      if(tk!==qrTk)return;
+      var box=$("qr"); box.innerHTML="";
+      lastUrl=location.href.split("#")[0]+tail;
+      new QRCode(box,{text:lastUrl,width:208,height:208,colorDark:"#14163a",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.L});
+      $("err").textContent="";
+      $("idVal").textContent=cardId;$("cid").textContent="Mã thiệp: "+cardId;$("cid").hidden=false;
+      card.dataset.cardId=cardId;$("qrOut").dataset.cardId=cardId;
+      document.dispatchEvent(new CustomEvent("thiep:qr",{detail:window.thiepData()}));
+      $("qrNote").textContent=locked?"Người nhận quét mã, nhập đúng câu mở thiệp rồi mới xem được thiệp. Chụp màn hình để lưu mã.":"Người nhận quét mã bằng camera điện thoại để mở thiệp. Chụp màn hình để lưu mã.";
+    }catch(e){
+      if(tk!==qrTk)return;
+      $("qr").innerHTML="";
+      $("err").textContent=e.message==="nocrypto"?"Câu mở thiệp chỉ dùng được khi mở trang bằng địa chỉ https.":"Lời chúc quá dài để tạo mã QR. Hãy rút gọn lại.";
+    }
+  }
+
+  async function tryOpen(){
+    $("gErr").textContent="";
+    if(!(window.crypto&&crypto.subtle)){$("gErr").textContent="Hãy mở thiệp bằng đường dẫn https.";return}
+    try{
+      apply(await unlock(K,$("gIn").value));
+      card.classList.remove("locked");
+      $("cm").classList.add("reveal");$("cf").classList.add("reveal");
+      spawn(26,true);
+    }catch(e){$("gErr").textContent="Chưa đúng rồi, bạn thử lại nhé."}
+  }
+
+  $("inTo").addEventListener("input",function(e){S.r=e.target.value;render()});
+  $("inName").addEventListener("input",function(e){S.n=e.target.value;render()});
+  $("inMsg").addEventListener("input",function(e){S.m=e.target.value;render()});
+  $("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(b){S.t=+b.dataset.t;render()}});
+  $("sugBtn").addEventListener("click",function(){pi=(pi+1)%presets.length;S.m=presets[pi];$("inMsg").value=S.m;render()});
+  $("qrBtn").addEventListener("click",function(){cardId=newId();makeQR()});
+  $("idCp").addEventListener("click",function(){var b=this;try{navigator.clipboard.writeText(cardId).then(function(){b.textContent="Đã sao chép";setTimeout(function(){b.textContent="Sao chép"},1500)})}catch(e){}});
+  $("inKey").addEventListener("input",function(){if(qrOn)makeQR()});
+  $("inHint").addEventListener("input",function(){if(qrOn)makeQR()});
+  $("gBtn").addEventListener("click",tryOpen);
+  $("gIn").addEventListener("keydown",function(e){if(e.key==="Enter")tryOpen()});
+
+  /* Chế độ xem khi quét mã */
+  var hs=location.hash, mc=hs.match(/[#&]c=([^&]+)/), mk=hs.match(/[#&]k=([^&]+)/), mh=hs.match(/[#&]h=([^&]+)/), mr=hs.match(/[#&]r=([^&]+)/), mi=hs.match(/[#&]i=([^&]+)/);
+  try{
+    if(mi&&/^[A-Z0-9-]{1,20}$/.test(mi[1])){cardId=mi[1];card.dataset.cardId=cardId;$("cid").textContent="Mã thiệp: "+cardId;$("cid").hidden=false}
+    if(mk){
+      K=mk[1];document.body.classList.add("view");card.classList.add("locked");
+      if(mr)$("gTx").textContent="Thiệp Trung Thu này dành cho "+decodeURIComponent(mr[1])+". Nhập câu mở thiệp để xem nhé.";
+      if(mh){var g=$("gHint");g.textContent="Gợi ý: "+decodeURIComponent(mh[1]);g.hidden=false}
+    }else if(mc){
+      apply(JSON.parse(new TextDecoder().decode(unb64(mc[1]))));document.body.classList.add("view");
+    }
+  }catch(e){}
+
+  $("inTo").value=S.r;$("inName").value=S.n;$("inMsg").value=S.m;
+  render();
+  spawn(12,false);
+})();
+</script>
+</body>
+</html>
